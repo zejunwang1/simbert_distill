@@ -100,6 +100,8 @@ usage: general_distill.py [-h] --training_file TRAINING_FILE --metrics_file
 
 - save_steps: 可选，保存模型参数的间隔 steps，默认为 500。
 
+MiniLMv2 蒸馏得到的学生模型存放在 student_init 中。
+
 ## Step3: 句对相似度任务蒸馏
 
 蒸馏的目标是教师模型计算得到的句对余弦相似度与学生模型得到的句对余弦相似度之间的均方误差损失。使用 task_distill_sentence_pairs.py 进行相似度任务蒸馏：
