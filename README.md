@@ -27,7 +27,19 @@ MiniLMv2 蒸馏的目标是教师模型某层的 query 与 query，key 与 key�
 ```shell
 export CUDA_VISIBLE_DEVICES=0
 simbert_base_dir=/home/wangzejun/nlp-tools/models/simbert-base-chinese/
-python general_distill.py --training_file data/general_sents.txt --metrics_file data/general_metrics.json --vocab_file vocab.txt --teacher_model ${simbert_base_dir} --student_model student_config/ --output_dir student_init --from_scratch --epochs 3 --reduce_memory --do_lower_case --batch_size 256 --learning_rate 1e-4 --max_seq_length 128 --logging_steps 10 --save_steps 100
+python general_distill.py --training_file data/general_sents.txt \
+                          --metrics_file data/general_metrics.json \
+                          --vocab_file vocab.txt \
+                          --teacher_model ${simbert_base_dir} \
+                          --student_model student_config/ \
+                          --output_dir student_init \
+                          --from_scratch --epochs 3 \
+                          --reduce_memory --do_lower_case \
+                          --batch_size 256 \
+                          --learning_rate 1e-4 \
+                          --max_seq_length 128 \
+                          --logging_steps 10 \
+                          --save_steps 100
 ```
 
 可支持的配置参数：
@@ -109,7 +121,23 @@ MiniLMv2 蒸馏得到的学生模型存放在 student_init 中。
 ```shell
 export CUDA_VISIBLE_DEVICES=0
 simbert_base_dir=/home/wangzejun/nlp-tools/models/simbert-base-chinese/
-python task_distill_sentence_pairs.py --training_file data/task_pairs.txt --metrics_file data/task_metrics.json --vocab_file vocab.txt --teacher_model ${simbert_base_dir} --student_model student_init/ --output_dir checkpoint --do_lower_case --eval_file data/sts-b-dev.txt --learning_rate 5e-5 --train_batch_size 64 --eval_batch_size 64 --epochs 3 --cosine_reduction 0.04 --reduce_memory --warmup_proportion 0.02 --logging_steps 10 --save_steps 100
+python task_distill_sentence_pairs.py --training_file data/task_pairs.txt \
+                                      --metrics_file data/task_metrics.json \
+                                      --vocab_file vocab.txt \
+                                      --teacher_model ${simbert_base_dir} \
+                                      --student_model student_init/ \
+                                      --output_dir checkpoint \
+                                      --do_lower_case \
+                                      --eval_file data/sts-b-dev.txt \
+                                      --learning_rate 5e-5 \
+                                      --train_batch_size 64 \
+                                      --eval_batch_size 64 \
+                                      --epochs 3 \
+                                      --cosine_reduction 0.04 \
+                                      --reduce_memory \
+                                      --warmup_proportion 0.02 \
+                                      --logging_steps 10 \
+                                      --save_steps 100
 ```
 
 可支持的配置参数：
